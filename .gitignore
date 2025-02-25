@@ -1,0 +1,3 @@
+# Ignora arquivos de dependências
+node_modules/
+vendor/

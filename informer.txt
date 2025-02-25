@@ -1,0 +1,17 @@
+continuando validando 
+
+instalando yup
+yarn add yup
+
+instalando bcrypt
+yarn add bcrypt
+
+migrando tabela de produtos
+yarn sequelize migration:create --name create-products-table
+
+apos configurar migrations create-products-table
+yarn sequelize db:migrate
+
+
+para upload de imagens
+yarn add multer
