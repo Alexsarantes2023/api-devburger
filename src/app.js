@@ -3,6 +3,8 @@ import express from 'express';  //nova forma de importar
 // const routes = require('./routes')    //importando de routes modo antigo
 import routes from './routes';  //nova forma de importar
 
+import { resolve } from 'node:path';
+
 //import './database';
 import './database';
 
@@ -16,6 +18,7 @@ class App {
     }
     middlewares() {
         this.app.use(express.json());
+        this.app.use('/product-file', express.static(resolve(__dirname, '..', 'uploads')));
     }
 
     routes() {
