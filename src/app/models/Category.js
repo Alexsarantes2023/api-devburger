@@ -10,6 +10,15 @@ class Category extends Model {
                 sequelize,
             },
         );
+
+        return this;
+    }
+    
+    static associate(models){
+        this.hasMany(models.Product,{
+        foreignKey:"category_id",
+        as:'category',
+        })
     }
 }
 
