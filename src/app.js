@@ -5,8 +5,8 @@ import routes from './routes';  //nova forma de importar
 
 import { resolve } from 'node:path';
 
-//import './database';
 import './database';
+//import './databse';
 
 
 class App {

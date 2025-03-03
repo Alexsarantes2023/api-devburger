@@ -18,3 +18,13 @@ yarn add multer
 
 instalando jwt
 yarn add jsonwebtoken
+
+
+criando migração de categorias
+yarn sequelize migration:create --name create-categories-table
+
+apos configuração do migration categories
+yarn sequelize db:migrate
+
+
+yarn sequelize migration:create --name add-category-id-column
