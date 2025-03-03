@@ -28,3 +28,10 @@ yarn sequelize db:migrate
 
 
 yarn sequelize migration:create --name add-category-id-column
+
+docker ps 
+
+docker run --name  devburger-mongo -p 27017:27017 -d -t mongo
+
+instalando mongoose
+yarn add mongoose
