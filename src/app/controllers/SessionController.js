@@ -38,12 +38,12 @@ class SessionController {
             return emailOrPasswordIncorrect();
         }
 
-        return response.json({
+        return response.status(201).json({
             id: user.id,
             name: user.name,
             email,
             admin: user.admin,
-            token: jwt.sign({ id: user.id }, authConfig.secret, {
+            token: jwt.sign({ id: user.id, name: user.name }, authConfig.secret, {
             expiresIn: authConfig.expiresIn,
             } )
         });
