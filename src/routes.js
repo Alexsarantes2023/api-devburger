@@ -25,7 +25,9 @@ routes.get('/products', ProductController.index);
 routes.post('/categories', CategoryController.store);
 routes.get('/categories', CategoryController.index);
 
-routes.post('/orders', OrderController.store);
+routes.post('/orders', OrderController.store); //criando pedido
+routes.get('/orders', OrderController.index); //listando pedido
+routes.put('/orders/:id', OrderController.update); //alterando status na orders
 
 //module.exports = routes
 export default routes

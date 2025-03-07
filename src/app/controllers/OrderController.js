@@ -3,6 +3,7 @@ import Order from '../schemas/Order';
 import Product from '../models/Product';
 import Category from '../models/Category';
 
+
 // id e quantity vem da nossa requisição e nao do banco de dados
 class OrderController {
     async store(request, response) {
@@ -40,8 +41,9 @@ class OrderController {
         });
 
         // mapeando o que foi recebido do banco de dados e formatando para um novo array ja criando um objeto declarado
-        const fomattedProducts = findProducts.map((product) => {
+        const formattedProducts = findProducts.map((product) => {
             // esta trazendo quantidade do array index da requisiçao
+            // busca o id do produto que vem da request e compara com o id do produto que vem do banco para busca a quantidade correta do produto
             const productIndex = products.findIndex((item) => item.id === product.id);
 
             const newProduct = {
@@ -60,10 +62,46 @@ class OrderController {
                 id: request.userId,
                 name: request.userName,
             },
-            products: fomattedProducts,
+            products: formattedProducts,
+            status: 'Pedido Realizado',
         }
+// acima foi feito toda a modelagem e tratamento dos dados e a baixo esta sendo criado com create 
+// o banco de dados em mongodb
+        const createdOrder = await Order.create(order);
+        
+        return response.status(201).json(createdOrder);
+    
+    }
+// nesta parte de codigo vamos listar os pedidos com os codigos a baixo find
+    async index(request, response) {
+        const orders = await Order.find();
 
-        return response.status(201).json(order);
+        return response.json(orders);
+    }
+
+    //agora faremos o update dos pedidos das ordens
+    async update(request, response) {
+        //inicio de fazer a validação trecho de codigo
+        const schema = Yup.object({  
+            status: Yup.string().required(),
+        });
+
+        try {
+            schema.validateSync(request.body, { abortEarly: false });
+        } catch (err) {
+            return response.status(400).json({ error: err.errors });
+        }
+        //fim de fazer a validação trecho de codigo
+
+
+        const { id } = request.params; //desta forma que recuperamos o id
+        const { status } = request.body; //desta forma que recuperamos o status
+
+        // antes devemos saber se o pedido existe updateOne quer dizer update em um so registro do mongodb
+        //o update sera procurando o id e update no status
+        await Order.updateOne({ _id: id }, { status }); //alterando o status com updateOne
+//retorno com a mensagem de que o status foi alterado com sucesso
+        return response.json({ message: 'Status updated sucessfully' });
     }
 
 }
