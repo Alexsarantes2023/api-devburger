@@ -35,3 +35,6 @@ docker run --name  devburger-mongo -p 27017:27017 -d -t mongo
 
 instalando mongoose
 yarn add mongoose
+
+criando coluna de ofertas
+yarn sequelize migration:create --name add-offer-column

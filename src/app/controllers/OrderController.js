@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import Order from '../schemas/Order';
 import Product from '../models/Product';
 import Category from '../models/Category';
+import User from '../models/User';
 
 
 // id e quantity vem da nossa requisição e nao do banco de dados
@@ -94,13 +95,30 @@ class OrderController {
         //fim de fazer a validação trecho de codigo
 
 
+   //procurando usuario com o id do usuario primarykey com findByPk
+        // saber se e Admin para acesso de usuario admin true para ter direito a update do status
+        const { admin: isAdmin } = await User.findByPk(request.userId);
+
+        if (!isAdmin) {
+            //fazendo a validação se nao for admin devolve erro 401 nao é admin
+            //se ele for admin pula a validação e segue a criação da categoria
+            return response.status(401).json();
+        }
+
+
+
         const { id } = request.params; //desta forma que recuperamos o id
         const { status } = request.body; //desta forma que recuperamos o status
 
-        // antes devemos saber se o pedido existe updateOne quer dizer update em um so registro do mongodb
+        //try catch para filtrar os erros do update
+        try {
+            // antes devemos saber se o pedido existe updateOne quer dizer update em um so registro do mongodb
         //o update sera procurando o id e update no status
         await Order.updateOne({ _id: id }, { status }); //alterando o status com updateOne
-//retorno com a mensagem de que o status foi alterado com sucesso
+        } catch (err) {
+            return response.json({ error: err.message }); 
+       }
+        //retorno com a mensagem de que o status foi alterado com sucesso
         return response.json({ message: 'Status updated sucessfully' });
     }
 
