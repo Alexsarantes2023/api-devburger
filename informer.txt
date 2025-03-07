@@ -63,7 +63,26 @@ executa com:
 
 yarn sequelize db:migrate
 
+//criando a coluna do caminho da imagem de categorias
+yarn sequelize migration:create --name add-path-column
 
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.addColumn('categories', 'path' {
+      type: Sequelize.STRING,
+    });
+  },
+
+  async down (queryInterface) {
+    await queryInterface.addColumn('categories', 'path');
+  }
+};
+
+// agora vamos fazer a ação acima com
+yarn sequelize db:migrate
 
 
 
