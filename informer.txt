@@ -1,5 +1,9 @@
 continuando validando 
 
+docker run --name  devburger-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+
+npx sequelize-cli db:migrate
+
 instalando yup
 yarn add yup
 
@@ -85,4 +89,11 @@ module.exports = {
 yarn sequelize db:migrate
 
 
+instalando cors 
+yarn add cors
 
+
+
+
+endereço da seed
+https://github.com/rodolfomori-devclub/seed-devburger-api.git

@@ -2,6 +2,7 @@
 import express from 'express';  //nova forma de importar
 // const routes = require('./routes')    //importando de routes modo antigo
 import routes from './routes';  //nova forma de importar
+import cors from 'cors';
 
 import { resolve } from 'node:path';
 
@@ -13,6 +14,7 @@ class App {
     constructor() {
         this.app = express();
 
+        this.app.use(cors());
         this.middlewares();
         this.routes();
     }
