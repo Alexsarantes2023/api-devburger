@@ -97,3 +97,43 @@ yarn add cors
 
 endereço da seed
 https://github.com/rodolfomori-devclub/seed-devburger-api.git
+
+
+
+
+============================================================================================================
+
+Para abrir a permissão na porta 3001 no Windows via Prompt de Comando (CMD), você pode seguir estes passos:
+
+Abra o CMD como Administrador:
+
+Pressione Win + S, digite cmd, e clique com o botão direito em Prompt de Comando.
+
+Escolha Executar como administrador.
+
+Adicionar uma regra no firewall para permitir a porta:
+
+No CMD, digite o seguinte comando e pressione Enter:
+
+
+netsh advfirewall firewall add rule name="Abrir Porta 3001" dir=in action=allow protocol=TCP localport=3001
+netsh advfirewall firewall add rule name="Abrir Porta 3001" dir=in action=allow protocol=UDP localport=3001
+
+
+============================================================================================================
+
+
+Isso criará uma regra no Firewall do Windows permitindo conexões TCP na porta 3001.
+
+Confirmar se a regra foi aplicada:
+
+Para verificar, digite:
+
+netsh advfirewall firewall show rule name="Abrir Porta 3001"
+
+
+
+Caso você queira abrir a porta para UDP, troque TCP por UDP no primeiro comando.
+
+Se tiver dúvidas ou precisar de outra configuração específica, me avise! 🚀
+=============================================================================================================

@@ -9,6 +9,8 @@ import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
 import CategoryController from './app/controllers/CategoryController';
 import OrderController from './app/controllers/OrderController';
+import CreatePaymentIntentController from './app/controllers/stripe/CreatePaymentIntentController';
+
 
 const routes = new Router();      // instanciando a classe Router
 
@@ -28,9 +30,11 @@ routes.get('/categories', CategoryController.index);
 routes.put('/categories/:id', upload.single('file'), CategoryController.update);
 
 routes.post('/orders', OrderController.store); //criando pedido
-routes.get('/orders', OrderController.index); //listando pedido
 routes.put('/orders/:id', OrderController.update); //alterando status na orders
+routes.get('/orders', OrderController.index); //listando pedido
+
+routes.post("/create-payment-intent", CreatePaymentIntentController.store);
 
 //module.exports = routes
-export default routes
+export default routes;
 
